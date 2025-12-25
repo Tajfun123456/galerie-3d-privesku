@@ -11,6 +11,7 @@ export default function ProposePage() {
   const updateInputFiles = (files: File[]) => {
     if (!fileInputRef.current) return;
 
+    // Vytvoříme nový DataTransfer objekt pro manipulaci s file inputem
     const dataTransfer = new DataTransfer();
     files.forEach(file => dataTransfer.items.add(file));
     fileInputRef.current.files = dataTransfer.files;
@@ -68,13 +69,28 @@ export default function ProposePage() {
           encType="multipart/form-data"
           className="space-y-6"
         >
+          {/* --- SKRYTÁ KONFIGURAČNÍ POLE --- */}
           <input type="hidden" name="_subject" value="Nový návrh přívěsku z webu!" />
           
-          {/* Ujistěte se, že tato URL odpovídá vaší Vercel doméně */}
-          <input type="hidden" name="_next" value="https://galerie-3d-privesku-mt2mwjc1w-simons-projects-3bb6104b.vercel.app/dekujeme" />
+          {/* OPRAVENÁ ADRESA PŘESMĚROVÁNÍ */}
+          <input type="hidden" name="_next" value="https://galerie-3d-privesku.vercel.app/hotovo" />
           
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />
+
+          {/* --- HONEYPOT (Ochrana proti spamu) --- */}
+          {/* Toto pole bot vyplní, ale člověk nevidí. Pokud je vyplněné, FormSubmit email zahodí. */}
+          <div className="opacity-0 absolute top-0 left-0 h-0 w-0 -z-10 overflow-hidden">
+             <label htmlFor="_honey">Please fill this field (required)</label>
+             <input 
+               type="text" 
+               name="_honey" 
+               id="_honey" 
+               tabIndex={-1} 
+               autoComplete="off"
+             />
+          </div>
+          {/* --- KONEC HONEYPOTU --- */}
 
           {/* Jméno */}
           <div>
@@ -115,7 +131,7 @@ export default function ProposePage() {
             ></textarea>
           </div>
 
-          {/* Upload souboru - VYLEPŠENÝ (Bez závorek v názvu) */}
+          {/* Upload souboru - POKROČILÝ (S náhledem seznamu) */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Přílohy (Obrázky nebo 3D modely)
@@ -135,10 +151,10 @@ export default function ProposePage() {
                 <span className="text-xs text-gray-500">Max 20 MB celkem</span>
             </div>
 
-            {/* Skrytý input - OPRAVENO: name="attachment" místo "attachment[]" */}
+            {/* Skrytý input */}
             <input 
               type="file" 
-              name="attachment" 
+              name="attachment[]" 
               id="attachment"
               ref={fileInputRef}
               multiple 

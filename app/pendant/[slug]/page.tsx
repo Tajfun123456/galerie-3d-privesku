@@ -116,8 +116,8 @@ export default async function PendantDetail({ params }: Props) {
                     <input type="hidden" name="_subject" value={`Poptávka: ${pendant.name}`} />
                     <input type="hidden" name="pendant_id" value={pendant.id} />
                     
-                    {/* --- ZMĚNA: Nastaveno na produkční doménu --- */}
-                    <input type="hidden" name="_next" value="https://galerie-3d-privesku-mt2mwjc1w-simons-projects-3bb6104b.vercel.app/dekujeme" />
+                    {/* ZMĚNA: Používáme stabilní hlavní doménu a cestu /hotovo */}
+                    <input type="hidden" name="_next" value="https://galerie-3d-privesku.vercel.app/hotovo" />
                     
                     <input type="hidden" name="_captcha" value="false" />
 
