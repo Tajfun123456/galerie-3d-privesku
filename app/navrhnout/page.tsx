@@ -70,24 +70,11 @@ export default function ProposePage() {
         >
           <input type="hidden" name="_subject" value="Nový návrh přívěsku z webu!" />
           
-          {/* --- ZMĚNA: Nastaveno na produkční doménu --- */}
+          {/* Ujistěte se, že tato URL odpovídá vaší Vercel doméně */}
           <input type="hidden" name="_next" value="https://galerie-3d-privesku-mt2mwjc1w-simons-projects-3bb6104b.vercel.app/dekujeme" />
           
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />
-
-          {/* --- POKROČILÝ HONEYPOT 🍯 --- */}
-          <div className="opacity-0 absolute top-0 left-0 h-0 w-0 -z-10 overflow-hidden">
-             <label htmlFor="_honey">Please fill this field (required)</label>
-             <input 
-               type="text" 
-               name="_honey" 
-               id="_honey" 
-               tabIndex={-1} 
-               autoComplete="off"
-             />
-          </div>
-          {/* --- KONEC HONEYPOTU --- */}
 
           {/* Jméno */}
           <div>
@@ -128,7 +115,7 @@ export default function ProposePage() {
             ></textarea>
           </div>
 
-          {/* Upload souboru - VYLEPŠENÝ */}
+          {/* Upload souboru - VYLEPŠENÝ (Bez závorek v názvu) */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Přílohy (Obrázky nebo 3D modely)
@@ -148,10 +135,10 @@ export default function ProposePage() {
                 <span className="text-xs text-gray-500">Max 20 MB celkem</span>
             </div>
 
-            {/* Skrytý input */}
+            {/* Skrytý input - OPRAVENO: name="attachment" místo "attachment[]" */}
             <input 
               type="file" 
-              name="attachment[]" 
+              name="attachment" 
               id="attachment"
               ref={fileInputRef}
               multiple 
